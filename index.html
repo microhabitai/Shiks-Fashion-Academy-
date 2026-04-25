@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shiks Fashion Academy — Learn Fashion Design in Nigeria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --off-black: #111111;
+    --charcoal: #1c1c1c;
+    --gold: #c9a84c;
+    --gold-light: #e2c97e;
+    --gold-pale: #f5e9c8;
+    --ivory: #f7f3ec;
+    --white: #ffffff;
+    --gray: #888888;
+    --light-gray: #d4d4d4;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Josefin Sans', sans-serif;
+    background: var(--black);
+    color: var(--ivory);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 10px; height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.12s ease;
+    opacity: 0.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 60px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    transition: padding 0.3s;
+  }
+  nav.scrolled { padding: 16px 60px; }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--light-gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--gold);
+    padding: 10px 24px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.pexels.com/photos/6567607/pexels-photo-6567607.jpeg?auto=compress&cs=tinysrgb&w=1400');
+    background-size: cover;
+    background-position: center 30%;
+    filter: brightness(0.28);
+    transform: scale(1.05);
+    animation: heroZoom 12s ease-in-out infinite alternate;
+  }
+  @keyframes heroZoom {
+    from { transform: scale(1.05); }
+    to   { transform: scale(1.0); }
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(10,10,10,0.6) 0%, transparent 60%, rgba(201,168,76,0.08) 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 60px;
+    max-width: 900px;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.3s forwards;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px; height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.2rem, 7vw, 6.5rem);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s forwards;
+  }
+  .hero-h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--light-gray);
+    margin: 24px 0 48px;
+    line-height: 1.8;
+    max-width: 480px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.7s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.9s forwards;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--gold);
+    padding: 18px 40px;
+    text-decoration: none;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--white);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .btn-primary:hover::after { transform: scaleX(1); }
+  .btn-primary span { position: relative; z-index: 1; }
+
+  .btn-ghost {
+    display: inline-block;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ivory);
+    border: 1px solid rgba(247,243,236,0.4);
+    padding: 18px 40px;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-ghost:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px; left: 60px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gray);
+    opacity: 0;
+    animation: fadeUp 0.9s 1.2s forwards;
+  }
+  .hero-scroll-line {
+    width: 60px; height: 1px;
+    background: var(--gray);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-scroll-line::after {
+    content: '';
+    position: absolute;
+    left: -100%;
+    top: 0; bottom: 0;
+    width: 100%;
+    background: var(--gold);
+    animation: scanline 2s 1.5s infinite;
+  }
+  @keyframes scanline {
+    to { left: 100%; }
+  }
+
+  .hero-stats {
+    position: absolute;
+    bottom: 40px; right: 60px;
+    display: flex;
+    gap: 48px;
+    opacity: 0;
+    animation: fadeUp 0.9s 1.1s forwards;
+  }
+  .stat {
+    text-align: right;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-top: 4px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 120px 60px; }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 30px; height: 1px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 4.5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+  .section-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .divider {
+    width: 60px; height: 1px;
+    background: var(--gold);
+    margin: 0 auto 60px;
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-wrap {
+    overflow: hidden;
+    border-top: 1px solid rgba(201,168,76,0.2);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    padding: 16px 0;
+    background: var(--charcoal);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 0;
+    animation: marquee 22s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 40px;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+  .marquee-item .dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--off-black);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-image-wrap {
+    position: relative;
+  }
+  .about-image-wrap img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(20%);
+  }
+  .about-image-badge {
+    position: absolute;
+    bottom: -20px; right: -20px;
+    width: 120px; height: 120px;
+    background: var(--gold);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--black);
+  }
+  .about-image-badge .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .about-image-badge .lbl {
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 2px;
+  }
+
+  .about-text { padding: 20px 0; }
+  .about-text p {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: var(--light-gray);
+    margin-bottom: 20px;
+  }
+  .about-text p strong { color: var(--gold-light); font-weight: 600; }
+
+  /* ── PROGRAMS ── */
+  #programs {
+    background: var(--black);
+    text-align: center;
+  }
+  #programs .section-label { justify-content: center; }
+  #programs .section-label::before { display: none; }
+
+  .programs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+    text-align: left;
+  }
+
+  .program-card {
+    position: relative;
+    background: var(--charcoal);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .program-card:hover { transform: translateY(-6px); }
+  .program-card:hover .program-img { filter: grayscale(0%) brightness(0.5); }
+  .program-card:hover .program-hover { opacity: 1; }
+
+  .program-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(40%) brightness(0.45);
+    transition: filter 0.4s;
+  }
+
+  .program-content {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 30px 24px;
+    background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, transparent 100%);
+  }
+  .program-tag {
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .program-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .program-desc {
+    font-size: 0.7rem;
+    line-height: 1.7;
+    color: var(--light-gray);
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s, max-height 0.3s;
+  }
+  .program-card:hover .program-desc { opacity: 1; max-height: 80px; }
+
+  .program-hover {
+    position: absolute;
+    top: 20px; right: 20px;
+    width: 40px; height: 40px;
+    border: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: var(--gold);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  /* ── WHY US ── */
+  #why {
+    background: var(--charcoal);
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .why-features {
+    display: grid;
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .why-feature {
+    padding: 28px 30px;
+    background: var(--off-black);
+    border-left: 2px solid transparent;
+    transition: border-color 0.3s, background 0.3s;
+    cursor: default;
+  }
+  .why-feature:hover {
+    border-left-color: var(--gold);
+    background: #161616;
+  }
+  .why-feature-icon {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+  .why-feature-title {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+  }
+  .why-feature-desc {
+    font-size: 0.8rem;
+    line-height: 1.8;
+    color: var(--gray);
+  }
+
+  .why-visual {
+    position: sticky;
+    top: 100px;
+  }
+  .why-image-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 4px;
+    margin-top: 60px;
+  }
+  .why-image-grid img {
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(20%);
+    transition: filter 0.3s;
+  }
+  .why-image-grid img:hover { filter: grayscale(0%); }
+  .why-image-grid img:first-child {
+    grid-column: 1 / 3;
+    aspect-ratio: 16/9;
+  }
+  .why-image-grid img:not(:first-child) {
+    aspect-ratio: 1/1;
+  }
+
+  /* ── GALLERY ── */
+  #gallery {
+    background: var(--black);
+    text-align: center;
+    padding-bottom: 0;
+  }
+  #gallery .section-label { justify-content: center; }
+  #gallery .section-label::before { display: none; }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 280px 280px;
+    gap: 4px;
+    margin-top: 60px;
+  }
+
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+  }
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(30%) brightness(0.8);
+    transition: filter 0.5s, transform 0.5s;
+  }
+  .gallery-item:hover img {
+    filter: grayscale(0%) brightness(1);
+    transform: scale(1.05);
+  }
+  .gallery-item:nth-child(1) { grid-column: span 2; }
+  .gallery-item:nth-child(2) { grid-column: span 1; }
+  .gallery-item:nth-child(3) { grid-column: span 3; }
+  .gallery-item:nth-child(4) { grid-column: span 2; }
+  .gallery-item:nth-child(5) { grid-column: span 2; }
+  .gallery-item:nth-child(6) { grid-column: span 2; }
+
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(201,168,76,0.15);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-overlay-text {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--white);
+    border: 1px solid var(--white);
+    padding: 10px 20px;
+  }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials {
+    background: var(--off-black);
+    overflow: hidden;
+    padding: 120px 0;
+  }
+  .testimonials-header {
+    padding: 0 60px;
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .testimonials-track-wrap {
+    overflow: hidden;
+  }
+  .testimonials-track {
+    display: flex;
+    gap: 24px;
+    animation: scrollTestimonials 30s linear infinite;
+    width: max-content;
+    padding: 0 60px;
+  }
+  .testimonials-track:hover { animation-play-state: paused; }
+  @keyframes scrollTestimonials {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .testimonial-card {
+    background: var(--charcoal);
+    border: 1px solid rgba(201,168,76,0.12);
+    padding: 36px;
+    width: 380px;
+    flex-shrink: 0;
+  }
+  .testimonial-stars {
+    color: var(--gold);
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    margin-bottom: 16px;
+  }
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--ivory);
+    margin-bottom: 24px;
+  }
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .testimonial-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--black);
+  }
+  .testimonial-name {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .testimonial-role {
+    font-size: 0.65rem;
+    color: var(--gray);
+    margin-top: 2px;
+  }
+
+  /* ── ENROLL / CONTACT ── */
+  #enroll {
+    background: var(--black);
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .enroll-cta-box {
+    background: var(--charcoal);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 60px;
+  }
+  .enroll-cta-box h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+  .enroll-cta-box h3 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .enroll-cta-box p {
+    font-size: 0.8rem;
+    line-height: 1.8;
+    color: var(--gray);
+    margin-bottom: 36px;
+  }
+
+  .contact-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .btn-whatsapp {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #25D366;
+    color: var(--white);
+    padding: 18px 30px;
+    text-decoration: none;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+  .btn-whatsapp:hover { background: #1ebe59; }
+  .btn-whatsapp svg { flex-shrink: 0; }
+
+  .btn-call {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold);
+    padding: 18px 30px;
+    text-decoration: none;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: border-color 0.2s, background 0.2s;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+  .btn-call:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); }
+
+  .contact-info {
+    padding: 20px 0;
+  }
+  .contact-info-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 40px;
+  }
+  .contact-info-title em { font-style: italic; color: var(--gold-light); }
+
+  .info-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .info-item:last-child { border-bottom: none; }
+  .info-icon {
+    width: 40px; height: 40px;
+    border: 1px solid rgba(201,168,76,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .info-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .info-value {
+    font-size: 0.9rem;
+    color: var(--light-gray);
+    line-height: 1.5;
+  }
+
+  /* Enrollment form */
+  .enroll-form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .form-field label {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+  .form-field input,
+  .form-field select {
+    background: var(--black);
+    border: 1px solid rgba(201,168,76,0.2);
+    color: var(--ivory);
+    padding: 14px 16px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.8rem;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+  .form-field input:focus,
+  .form-field select:focus {
+    border-color: var(--gold);
+  }
+  .form-field input::placeholder { color: var(--gray); }
+  .form-submit {
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    padding: 18px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 6px;
+  }
+  .form-submit:hover { background: var(--gold-light); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--off-black);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding: 60px;
+  }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+  .footer-brand h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+  .footer-brand h3 span { color: var(--gold); }
+  .footer-brand p {
+    font-size: 0.78rem;
+    line-height: 1.8;
+    color: var(--gray);
+    margin-bottom: 24px;
+    max-width: 280px;
+  }
+  .footer-social {
+    display: flex;
+    gap: 12px;
+  }
+  .social-btn {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(201,168,76,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .social-btn:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
+
+  .footer-col h4 {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li {
+    margin-bottom: 12px;
+  }
+  .footer-col a {
+    font-size: 0.78rem;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--gold-light); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-bottom p {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--gray);
+  }
+  .footer-bottom span { color: var(--gold); }
+
+  /* Modal */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--charcoal);
+    border: 1px solid rgba(201,168,76,0.25);
+    padding: 60px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    animation: fadeUp 0.4s forwards;
+  }
+  .modal h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  .modal h3 em { font-style: italic; color: var(--gold-light); }
+  .modal p {
+    font-size: 0.8rem;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 30px;
+  }
+  .modal-close {
+    position: absolute;
+    top: 20px; right: 24px;
+    background: none;
+    border: none;
+    color: var(--gray);
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+  .modal { position: relative; }
+
+  /* Scroll animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Mobile */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    nav.scrolled { padding: 14px 24px; }
+    .nav-links, .nav-cta { display: none; }
+    section { padding: 80px 24px; }
+    #hero { padding: 0; }
+    .hero-content { padding: 0 24px; }
+    .hero-stats { bottom: 24px; right: 24px; gap: 24px; }
+    .stat-num { font-size: 1.6rem; }
+    .hero-scroll { display: none; }
+    #about { grid-template-columns: 1fr; }
+    .about-image-wrap { display: none; }
+    .programs-grid { grid-template-columns: 1fr 1fr; }
+    #why { grid-template-columns: 1fr; }
+    .why-visual { display: none; }
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+    .gallery-item { grid-column: span 1 !important; aspect-ratio: 1/1; }
+    #enroll { grid-template-columns: 1fr; }
+    .enroll-cta-box { padding: 36px 24px; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .cursor, .cursor-ring { display: none; }
+    body { cursor: auto; }
+    .hero-h1 { font-size: 2.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Shiks <span>Fashion</span> Academy</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#enroll">Contact</a></li>
+  </ul>
+  <a href="#enroll" class="nav-cta">Enroll Now</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Shiks Fashion Academy · Lagos, Nigeria</p>
+    <h1 class="hero-h1">Where Designers<br>Are <em>Born.</em></h1>
+    <p class="hero-sub">Learn fashion design from scratch to professional level — hands-on, practical, and career-ready.</p>
+    <div class="hero-actions">
+      <a href="#enroll" class="btn-primary" onclick="openModal()"><span>Enroll Now →</span></a>
+      <a href="#programs" class="btn-ghost">View Programs</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    Scroll
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">500+</div>
+      <div class="stat-label">Graduates</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">8+</div>
+      <div class="stat-label">Years Training</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">12</div>
+      <div class="stat-label">Expert Tutors</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item"><span class="dot"></span> Fashion Design</span>
+    <span class="marquee-item"><span class="dot"></span> Advanced Tailoring</span>
+    <span class="marquee-item"><span class="dot"></span> Pattern Making</span>
+    <span class="marquee-item"><span class="dot"></span> Fashion Illustration</span>
+    <span class="marquee-item"><span class="dot"></span> Fabric & Textiles</span>
+    <span class="marquee-item"><span class="dot"></span> Bridal Design</span>
+    <span class="marquee-item"><span class="dot"></span> Certified Training</span>
+    <span class="marquee-item"><span class="dot"></span> Career Mentorship</span>
+    <!-- Duplicate for seamless loop -->
+    <span class="marquee-item"><span class="dot"></span> Fashion Design</span>
+    <span class="marquee-item"><span class="dot"></span> Advanced Tailoring</span>
+    <span class="marquee-item"><span class="dot"></span> Pattern Making</span>
+    <span class="marquee-item"><span class="dot"></span> Fashion Illustration</span>
+    <span class="marquee-item"><span class="dot"></span> Fabric & Textiles</span>
+    <span class="marquee-item"><span class="dot"></span> Bridal Design</span>
+    <span class="marquee-item"><span class="dot"></span> Certified Training</span>
+    <span class="marquee-item"><span class="dot"></span> Career Mentorship</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-image-wrap reveal">
+    <img src="https://images.pexels.com/photos/3622608/pexels-photo-3622608.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Fashion design student at Shiks Fashion Academy">
+    <div class="about-image-badge">
+      <span class="num">8+</span>
+      <span class="lbl">Years of<br>Excellence</span>
+    </div>
+  </div>
+  <div class="about-text reveal">
+    <p class="section-label">Our Story</p>
+    <h2 class="section-title">More than a school —<br>a <em>movement.</em></h2>
+    <p>Shiks Fashion Academy was founded with a simple but powerful belief: <strong>every Nigerian with a passion for fashion deserves world-class training.</strong> We set out to close the gap between raw talent and professional skill.</p>
+    <p>What started as a small atelier has grown into one of Nigeria's most trusted fashion training institutions. Our graduates are designing for top clients, launching their own brands, and dressing stages across Africa and beyond.</p>
+    <p>We don't just teach you how to sew — <strong>we teach you how to think like a designer</strong>, build a business, and own your craft.</p>
+    <a href="#enroll" class="btn-primary" style="margin-top:20px;display:inline-block;"><span>Begin Your Journey →</span></a>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs">
+  <p class="section-label">What We Teach</p>
+  <h2 class="section-title">Our <em>Signature</em> Programs</h2>
+  <p style="color:var(--gray);font-size:0.85rem;max-width:500px;margin:0 auto;line-height:1.8;">
+    Each course is designed to take you from where you are to where you want to be — with expert guidance every step of the way.
+  </p>
+  <div class="programs-grid reveal">
+    <div class="program-card">
+      <img src="https://images.pexels.com/photos/4620866/pexels-photo-4620866.jpeg?auto=compress&cs=tinysrgb&w=600" class="program-img" alt="Beginner Fashion Design">
+      <div class="program-content">
+        <p class="program-tag">Level 01</p>
+        <h3 class="program-name">Beginner Fashion Design</h3>
+        <p class="program-desc">Start from zero. Learn the fundamentals of design, fabric, and construction in a supportive hands-on environment.</p>
+      </div>
+      <div class="program-hover">→</div>
+    </div>
+    <div class="program-card">
+      <img src="https://images.pexels.com/photos/3622622/pexels-photo-3622622.jpeg?auto=compress&cs=tinysrgb&w=600" class="program-img" alt="Advanced Tailoring">
+      <div class="program-content">
+        <p class="program-tag">Level 02</p>
+        <h3 class="program-name">Advanced Tailoring</h3>
+        <p class="program-desc">Master precision cutting, fitting, and professional finishing techniques for bespoke garments.</p>
+      </div>
+      <div class="program-hover">→</div>
+    </div>
+    <div class="program-card">
+      <img src="https://images.pexels.com/photos/6567721/pexels-photo-6567721.jpeg?auto=compress&cs=tinysrgb&w=600" class="program-img" alt="Pattern Making">
+      <div class="program-content">
+        <p class="program-tag">Level 03</p>
+        <h3 class="program-name">Pattern Making</h3>
+        <p class="program-desc">The language of fashion — learn to draft, grade, and adapt patterns for any body type and style.</p>
+      </div>
+      <div class="program-hover">→</div>
+    </div>
+    <div class="program-card">
+      <img src="https://images.pexels.com/photos/5709661/pexels-photo-5709661.jpeg?auto=compress&cs=tinysrgb&w=600" class="program-img" alt="Fashion Illustration">
+      <div class="program-content">
+        <p class="program-tag">Level 04</p>
+        <h3 class="program-name">Fashion Illustration</h3>
+        <p class="program-desc">Bring your ideas to life on paper. Learn professional illustration techniques used in top fashion houses.</p>
+      </div>
+      <div class="program-hover">→</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div>
+    <p class="section-label">Why Choose Us</p>
+    <h2 class="section-title">Training that <em>transforms</em> you.</h2>
+    <p style="color:var(--gray);font-size:0.85rem;max-width:400px;line-height:1.8;margin-top:10px;">
+      We've built a learning environment where talent meets structure, and dreams meet real-world skills.
+    </p>
+    <div class="why-features reveal">
+      <div class="why-feature">
+        <div class="why-feature-icon">🎓</div>
+        <div class="why-feature-title">Experienced Instructors</div>
+        <p class="why-feature-desc">Our tutors are working fashion professionals with real industry experience — not just teachers.</p>
+      </div>
+      <div class="why-feature">
+        <div class="why-feature-icon">✂️</div>
+        <div class="why-feature-title">Hands-On Training</div>
+        <p class="why-feature-desc">You learn by doing. Every session involves practical work on real garments and projects.</p>
+      </div>
+      <div class="why-feature">
+        <div class="why-feature-icon">🗓️</div>
+        <div class="why-feature-title">Flexible Learning Schedule</div>
+        <p class="why-feature-desc">Morning, afternoon, and weekend classes available — designed to fit your life.</p>
+      </div>
+      <div class="why-feature">
+        <div class="why-feature-icon">🏅</div>
+        <div class="why-feature-title">Certified on Completion</div>
+        <p class="why-feature-desc">Receive a professional certificate recognised by fashion industry partners on graduation.</p>
+      </div>
+    </div>
+  </div>
+  <div class="why-visual">
+    <div class="why-image-grid reveal">
+      <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Students working together" style="aspect-ratio:16/9">
+      <img src="https://images.pexels.com/photos/4620867/pexels-photo-4620867.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Fashion detail work">
+      <img src="https://images.pexels.com/photos/3622621/pexels-photo-3622621.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Sewing and crafting">
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <p class="section-label">Student Work</p>
+  <h2 class="section-title">Made by <em>Our Students.</em></h2>
+  <p style="color:var(--gray);font-size:0.85rem;max-width:500px;margin:0 auto;line-height:1.8;">
+    Every piece below was created by students who started exactly where you are now.
+  </p>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Fashion design student work">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">View</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.pexels.com/photos/2220316/pexels-photo-2220316.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Student creation">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">View</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.pexels.com/photos/1462637/pexels-photo-1462637.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Fashion garment">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">View</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.pexels.com/photos/3622616/pexels-photo-3622616.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tailoring work">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">View</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.pexels.com/photos/3622617/pexels-photo-3622617.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fashion design">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">View</span></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.pexels.com/photos/6567557/pexels-photo-6567557.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Student fashion piece">
+      <div class="gallery-overlay"><span class="gallery-overlay-text">View</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-header reveal">
+    <p class="section-label" style="justify-content:center;"><span style="display:none;"></span>What Our Graduates Say</p>
+    <h2 class="section-title">Their stories,<br>your <em>future.</em></h2>
+  </div>
+  <div class="testimonials-track-wrap">
+    <div class="testimonials-track" id="testimonialTrack">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"I came in not knowing how to hold a pair of scissors properly. Six months later, I launched my own bridal line. Shiks changed everything for me."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">A</div>
+          <div>
+            <div class="testimonial-name">Adaeze Okonkwo</div>
+            <div class="testimonial-role">Bridal Designer · Lagos</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"The instructors are the best. They don't just show you how — they make sure you understand why. My pattern-making skills are now at a professional level."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">F</div>
+          <div>
+            <div class="testimonial-name">Fatima Musa</div>
+            <div class="testimonial-role">Ready-to-Wear Designer · Abuja</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"I was worried it would be too technical, but the hands-on approach made it easy to follow. The certificate opened doors I didn't even know existed."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">C</div>
+          <div>
+            <div class="testimonial-name">Chiamaka Eze</div>
+            <div class="testimonial-role">Fashion Entrepreneur · Enugu</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Best investment I've made. The flexible schedule meant I could train without leaving my 9-5. Now fashion is my full-time business."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">T</div>
+          <div>
+            <div class="testimonial-name">Toyin Adeleke</div>
+            <div class="testimonial-role">Bespoke Tailor · Lagos</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"From day one, you feel like you belong. Shiks Academy doesn't just train you — they believe in you, and that makes all the difference."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">N</div>
+          <div>
+            <div class="testimonial-name">Ngozi Iwu</div>
+            <div class="testimonial-role">Fashion Illustrator · Port Harcourt</div>
+          </div>
+        </div>
+      </div>
+      <!-- Duplicate for loop -->
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"I came in not knowing how to hold a pair of scissors properly. Six months later, I launched my own bridal line. Shiks changed everything for me."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">A</div>
+          <div>
+            <div class="testimonial-name">Adaeze Okonkwo</div>
+            <div class="testimonial-role">Bridal Designer · Lagos</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"The instructors are the best. They don't just show you how — they make sure you understand why. My pattern-making skills are now at a professional level."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">F</div>
+          <div>
+            <div class="testimonial-name">Fatima Musa</div>
+            <div class="testimonial-role">Ready-to-Wear Designer · Abuja</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Best investment I've made. The flexible schedule meant I could train without leaving my 9-5. Now fashion is my full-time business."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">T</div>
+          <div>
+            <div class="testimonial-name">Toyin Adeleke</div>
+            <div class="testimonial-role">Bespoke Tailor · Lagos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENROLL / CONTACT -->
+<section id="enroll">
+  <div class="reveal">
+    <p class="section-label">Ready to Start?</p>
+    <h2 class="section-title">Your design<br>journey starts <em>today.</em></h2>
+    <br>
+    <div class="enroll-cta-box">
+      <h3>Talk to <em>Us Directly</em></h3>
+      <p>Have questions about a course? Want to know what's right for you? Reach us on WhatsApp or give us a call — our team is happy to help.</p>
+      <div class="contact-buttons">
+        <a href="https://wa.me/2348000000000?text=Hello%2C%20I%27m%20interested%20in%20enrolling%20at%20Shiks%20Fashion%20Academy" class="btn-whatsapp" target="_blank">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+          </svg>
+          Chat on WhatsApp
+        </a>
+        <a href="tel:+2348000000000" class="btn-call">
+          📞 &nbsp; Call Us: 0800 000 0000
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="contact-info">
+      <h3 class="contact-info-title">Enroll <em>Today</em></h3>
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div>
+          <p class="info-label">Location</p>
+          <p class="info-value">Lagos, Nigeria<br>Exact address provided on enrollment</p>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">⏰</div>
+        <div>
+          <p class="info-label">Class Times</p>
+          <p class="info-value">Morning · Afternoon · Weekend<br>Flexible to suit your schedule</p>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">🎓</div>
+        <div>
+          <p class="info-label">Next Intake</p>
+          <p class="info-value">Rolling enrollment — start any month<br>Limited spaces available</p>
+        </div>
+      </div>
+    </div>
+    <form class="enroll-form" onsubmit="handleFormSubmit(event)">
+      <div class="form-row">
+        <div class="form-field">
+          <label>Full Name</label>
+          <input type="text" placeholder="Your full name">
+        </div>
+        <div class="form-field">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+234 800 000 0000">
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Course of Interest</label>
+        <select>
+          <option value="" disabled selected>Choose a program</option>
+          <option>Beginner Fashion Design</option>
+          <option>Advanced Tailoring</option>
+          <option>Pattern Making</option>
+          <option>Fashion Illustration</option>
+        </select>
+      </div>
+      <button type="submit" class="form-submit">Send Enrollment Request →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>Shiks <span>Fashion</span> Academy</h3>
+      <p>Training the next generation of Nigerian fashion designers — from beginner to professional, with heart and precision.</p>
+      <div class="footer-social">
+        <a href="#" class="social-btn">ig</a>
+        <a href="#" class="social-btn">fb</a>
+        <a href="#" class="social-btn">tw</a>
+        <a href="#" class="social-btn">yt</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Programs</h4>
+      <ul>
+        <li><a href="#">Beginner Fashion Design</a></li>
+        <li><a href="#">Advanced Tailoring</a></li>
+        <li><a href="#">Pattern Making</a></li>
+        <li><a href="#">Fashion Illustration</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Academy</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#gallery">Student Gallery</a></li>
+        <li><a href="#why">Why Shiks</a></li>
+        <li><a href="#enroll">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="https://wa.me/2348000000000">WhatsApp Us</a></li>
+        <li><a href="tel:+2348000000000">0800 000 0000</a></li>
+        <li><a href="mailto:hello@shiksfashion.ng">hello@shiksfashion.ng</a></li>
+        <li><a href="#">Lagos, Nigeria</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 <span>Shiks Fashion Academy</span>. All rights reserved.</p>
+    <p>Designed with ♥ for aspiring designers across Nigeria.</p>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="enrollModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3>Start Your <em>Journey</em></h3>
+    <p>You're one step closer to becoming a professional fashion designer. Contact us directly to get started:</p>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <a href="https://wa.me/2348000000000?text=Hello%2C%20I%27d%20like%20to%20enroll%20at%20Shiks%20Fashion%20Academy" class="btn-whatsapp" style="justify-content:center;" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+        </svg>
+        WhatsApp Enrollment
+      </a>
+      <a href="#enroll" class="btn-ghost" style="text-align:center;" onclick="closeModal()">Fill Enrollment Form</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
+    rx += (e.clientX - rx) * 0.15;
+    ry += (e.clientY - ry) * 0.15;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+  });
+
+  document.querySelectorAll('a, button, .program-card, .why-feature').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '16px'; cursor.style.height = '16px';
+      ring.style.width = '52px'; ring.style.height = '52px';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '10px'; cursor.style.height = '10px';
+      ring.style.width = '36px'; ring.style.height = '36px';
+    });
+  });
+
+  // Smooth ring lag
+  function animateRing() {
+    rx += (parseFloat(cursor.style.left || 0) - rx) * 0.12;
+    ry += (parseFloat(cursor.style.top  || 0) - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // Navbar scroll
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 80);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Modal
+  function openModal() {
+    document.getElementById('enrollModal').classList.add('open');
+  }
+  function closeModal() {
+    document.getElementById('enrollModal').classList.remove('open');
+  }
+  document.getElementById('enrollModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // Form submit
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = '✓ Request Sent! We\'ll contact you soon.';
+    btn.style.background = '#25D366';
+    setTimeout(() => {
+      btn.textContent = 'Send Enrollment Request →';
+      btn.style.background = '';
+    }, 3000);
+  }
+</script>
+</body>
+</html>
